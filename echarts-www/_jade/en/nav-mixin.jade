@@ -1,0 +1,105 @@
+mixin nav(hostParam, cdnPayRootParam, cdnPayVersionParam)
+    div(class='container-fluid')
+        div(class='navbar-header')
+            button(type="button", class="navbar-toggle collapsed", data-toggle="collapse", data-target="#navbar-collapse", aria-expanded="false")
+                span.sr-only Toggle navigation
+                span.icon-bar
+                span.icon-bar
+                span.icon-bar
+            a(class='navbar-brand' href="#{hostParam}/en/index.html")
+                img(class="navbar-logo", src="#{cdnPayRootParam}/en/images/logo.png", alt="echarts logo")
+        div(class="collapse navbar-collapse", id="navbar-collapse")
+            ul(class='nav navbar-nav navbar-left')
+                li#nav-index
+                    a(href='#{hostParam}/en/index.html') Home
+                li#nav-doc.dropdown
+                    a(href='#', class="dropdown-toggle", data-toggle="dropdown") Docs
+                        b.caret
+                    ul.dropdown-menu
+                        li
+                            a(href="#{hostParam}/en/feature.html") Features
+                        li
+                            a(href="#{hostParam}/en/tutorial.html") Tutorials
+                        li
+                            a(href="#{hostParam}/en/api.html") API
+                        li
+                            a(href="#{hostParam}/en/option.html") Chart Configuration
+                        //- li
+                        //-     a(href="#{hostParam}/en/option-gl.html") GL Configuration
+                        li
+                            a(href="#{hostParam}/en/changelog.html") Changelog
+                        li
+                            a(href='#{hostParam}/en/faq.html') FAQ
+                li#nav-download.dropdown
+                    a(href='#', class="dropdown-toggle", data-toggle="dropdown") Download
+                        b.caret
+                    ul.dropdown-menu
+                        li
+                            a(href="#{hostParam}/en/download.html") Download
+                        li
+                            a(href="#{hostParam}/en/download-theme.html") Download Themes
+                        li
+                            a(href="#{hostParam}/en/download-extension.html") Download Extensions
+                li#nav-examples
+                    a(href='#{hostParam}/examples/en/index.html') Examples
+                li#nav-resources
+                    a(href='#', class="dropdown-toggle", data-toggle="dropdown") Resources
+                        b.caret
+                    ul.dropdown-menu
+                        li
+                            a(href="#{hostParam}/en/spreadsheet.html") Spread Sheet Tool
+                        li
+                            a(href="#{hostParam}/en/theme-builder.html") Theme Builder
+                        li
+                            a(href="#{hostParam}/en/cheat-sheet.html") Cheat Sheet
+                        li
+                            a(href="#{hostParam}/en/resources.html") More Resources
+                li#nav-contribute
+                    a.dropdown-toggle(href='#', data-toggle='dropdown')
+                        | Community
+                        b.caret
+                    ul.dropdown-menu
+                        li
+                            a(href='#{hostParam}/en/committers.html') Committers
+                        li
+                            a(href='#{hostParam}/en/maillist.html') Mailing List
+                        li
+                            a(href='#{hostParam}/en/contributing.html') How to Contribute
+                        li
+                            a(href='#{hostParam}/en/dependencies.html') Dependencies
+                        li
+                            a(href='#{hostParam}/en/coding-standard.html') Code Standard
+                        li
+                            a(href='https://github.com/apache/incubator-echarts', target='_blank') Source Code (GitHub)
+                                include ../components/svg/external-link
+                        li
+                            a(href='https://github.com/apache/incubator-echarts/issues', target='_blank') Issues (GitHub)
+                                include ../components/svg/external-link
+                li#nav-others
+                    a(href='#', class="dropdown-toggle", data-toggle="dropdown") Others
+                        b.caret
+                    ul.dropdown-menu
+                        li
+                            a(href='https://www.apache.org/', target='_blank') Apache Software Foundation
+                                include ../components/svg/external-link
+                        li
+                            a(href='#{hostParam}/en/security.html') Security
+                        li
+                            a(href='https://www.apache.org/licenses/', target='_blank') License
+                                include ../components/svg/external-link
+                        li
+                            a(href='https://www.apache.org/events/current-event', target='_blank') Events
+                                include ../components/svg/external-link
+                        li
+                            a(href='https://www.apache.org/foundation/sponsorship.html', target='_blank') Sponsorship
+                                include ../components/svg/external-link
+                        li
+                            a(href='https://www.apache.org/foundation/thanks.html', target='_blank') Thanks
+                                include ../components/svg/external-link
+
+            ul(class='nav navbar-nav navbar-right')
+                li#nav-homeen
+                    a(href='javascript:;', onclick="changeLang('zh')") 中文
+                li#nav-apache
+                    a(href="https://www.apache.org/" target="_blank")
+                        img(src="#{cdnPayRootParam}/en/images/asf_logo_white.png?_v_=#{cdnPayVersionParam}")

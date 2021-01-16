@@ -1,0 +1,198 @@
+extends ../layouts/basic
+
+block extra_head
+    - var isCN = ecWWWLang == 'zh';
+
+    title #{isCN ? 'ECharts 在线构建' : 'ECharts Online Builder'}
+
+block content
+    - var isCN = ecWWWLang == 'zh';
+
+    nav(class='navbar navbar-default navbar-fixed-top')
+        if isCN
+            include ./nav
+        else
+            include ../en/nav
+    .page-main
+        block vars
+
+        #builder
+            .page-info
+                #title.container
+                    h1 #{isCN ? '在线定制' : 'Online Builder'}
+                    if isCN
+                        p 可自由选择所需图表、坐标系、组件进行打包下载。
+                        p 注意：打包的源文件来自 jsdelivr CDN，非 Apache 官方源代码和编译产物
+                    else
+                        p Bundle and download the needed charts and components.
+                        p NOTE: The bundler downloads sources from jsdelivr CDN, It's not an official apache source release or distribution.
+                    div.download-version
+                        if isCN
+                            span 选择版本
+                        else
+                            span Select a version
+                        select#versions
+
+            .page-content
+                #configuration.container
+
+                    section#charts
+                        h3 #{isCN ? '图表' : 'Chart'}
+                            span #{isCN ? 'chart' : ''}
+                        p.desc #{isCN ? '选择要打包的图表' : 'Select the charts needed to be packed'}
+                            if isCN
+                                span.warn （注：开发环境建议不压缩代码，代码压缩会去掉大部分常见的警告和错误提示）
+                            else
+                                br
+                                span.warn (The warnings and hints will not be printed on the browser console if using "Code Compression")
+
+                        ul
+                            each names, key in charts
+                                li(class=names[2] ? 'checked' : '')
+                                    img(src="#{cdnPayRoot}/#{ecWWWLang}/images/builder/chart/#{key}.svg?_v_=#{cdnPayVersion}", alt="")
+                                    input(type="checkbox" name="#{key}")
+                                    <h5>#{isCN ? names[0] : ''} <div>#{names[1]}</div></h5>
+
+                    section#coords
+                        h3 #{isCN ? '坐标系' : 'Coordinate Systems'}
+                            span #{isCN ? 'coordinate systems' : ''}
+                        if isCN
+                            p.desc 选择要打包的坐标系，有些图表像散点图，折线图可以被应用到多个坐标系上
+                        else
+                            p.desc Select coordinate systems needed to be packed. Some of the charts like "scatter", "line", "graph", "custom" can layout on multiple coordiante systems.
+
+                        ul
+                            each names, key in coords
+                                li(class=names[2] ? 'checked' : '')
+                                    img(src="#{cdnPayRoot}/#{ecWWWLang}/images/builder/component/#{key}.svg?_v_=#{cdnPayVersion}", alt="")
+                                    input(type="checkbox" name="#{key}")
+                                    <h5>#{isCN ? names[0] : ''} <div>#{names[1]}</div></h5>
+
+                    section#components
+                        h3 #{isCN ? '组件' : 'Component'}
+                            span #{isCN ? 'component' : ''}
+                        if isCN
+                            p.desc 选择要打包的组件
+                        else
+                            p.desc Select components needed to be packed.
+
+                        ul
+                            each names, key in components
+                                li(class=names[2] ? 'checked' : '')
+                                    img(src="#{cdnPayRoot}/#{ecWWWLang}/images/builder/component/#{key}.svg?_v_=#{cdnPayVersion}", alt="")
+                                    input(type="checkbox" name="#{names[3] || key}")
+                                    <h5>#{isCN ? names[0] : ''} <div>#{names[1]}</div></h5>
+
+                    section#other
+                        h3 #{isCN ? '其它选项' : 'Others'}
+                            span #{isCN ? 'others' : ''}
+                        div.other-option
+                            input(type="checkbox" id="svg" name="svg")
+                            label(for="svg") #{isCN ? 'SVG 渲染' : 'SVG Renderer'}
+                            if isCN
+                                p.desc 是否包括 SVG 渲染器，从而能支持使用 SVG 来绘制图表
+                            else
+                                p.desc Whether to include the SVG Renderer, which enables rendering based on SVG.
+                        div.other-option
+                            input(type="checkbox" id="vml" name="vml")
+                            label(for="vml") #{isCN ? '兼容 IE8' : 'Available on IE8 (VML Renderer)'}
+                            if isCN
+                                p.desc 是否包括对 IE8 的兼容代码
+                            else
+                                p.desc Whether to include the VML Renderer to support rendering on IE8.
+                        div.other-option
+                            input(type="checkbox" id="api" name="api" checked="checked")
+                            label(for="api") #{isCN ? '工具集' : 'Utilities'}
+                            if isCN
+                                p.desc 是否在 echarts 对象上挂载常用工具集。一般都会挂载，除非对生成的文件的体积有苛求，并且不需要用这些工具集。
+                            else
+                                p.desc Whether to mount utilities on the echarts namespace. Utilities are usually included, unless requiring minimum bundle size and not need them.
+                        div.other-option
+                            input(type="checkbox" id="compress" name="compress" checked="checked")
+                            label(for="compress") #{isCN ? '代码压缩' : 'Code Compression'}
+                            if isCN
+                                p.desc 是否使用 UglifyJS 压缩后的代码，开发环境建议不压缩代码，代码压缩会去掉大部分常见的警告和错误提示。
+                            else
+                                p.desc Whether to Compress code. It is recommended not to compress code in the development environment, because warnings and hints will be removed after compressing.
+
+                #action
+                    a.btn.btn-main.btn-thirdary#build(href="javascript:;") #{isCN ? '下载' : 'Download'}
+
+        if isCN
+            include ./footer
+        else
+            include ../en/footer
+
+block extra_js
+    script(src="https://cdn.jsdelivr.net/npm/compare-versions@3.6.0/index.min.js")
+    script.
+        var $versionsDom = document.querySelector('#versions');
+
+        fetch('https://data.jsdelivr.com/v1/package/npm/echarts', {
+            mode: 'cors'
+        }).then(res => res.json()).then(json => {
+            const versions = json.versions.filter(version => compareVersions(version, '3.8.0') >= 0);
+            versions.forEach(version => {
+                const $optionDom = document.createElement('option');
+                $optionDom.value = version;
+                $optionDom.innerHTML = version;
+                $versionsDom.appendChild($optionDom);
+            });
+            $versionsDom.value = json.tags.latest;
+        });
+
+        function updateCheckbox() {
+            $('#charts input, #components input, #coords input').each(function () {
+                $(this).attr('checked', $(this).parent().hasClass('checked'));
+            });
+        }
+
+        $('#charts li, #components li, #coords li').click(function () {
+            $(this).toggleClass('checked');
+
+            updateCheckbox();
+        });
+
+        updateCheckbox();
+
+        // Build
+        $("#build").click(function () {
+            var charts = [];
+            $('#charts .checked input').each(function () {
+                charts.push($(this).attr('name'));
+            });
+
+            var components = [];
+            $('#coords .checked input').each(function () {
+                components.push($(this).attr('name'));
+            });
+            $('#components .checked input').each(function () {
+                components.push($(this).attr('name'));
+            });
+
+            var parameters = 'charts=' + charts.join(',') + '&components=' + components.join(',');
+
+            if (!$('#compress').prop('checked')) {
+                parameters += '&source=true';
+            }
+            if ($('#vml').prop('checked')) {
+                parameters += '&vml=true';
+            }
+            if ($('#svg').prop('checked')) {
+                parameters += '&svg=true';
+            }
+            if ($('#api').prop('checked')) {
+                parameters += '&api=true';
+            }
+
+            parameters += `&version=${$versionsDom.value || ''}`;
+
+            //- var email = $('#email').val();
+            var log = parameters;
+            //- if (email) {
+            //-     log += '&email=' + email;
+            //- }
+            _hmt.push(['_trackEvent', 'builder', 'build', '#{downloadVersion}', log]);
+
+            window.open('#{host}/#{ecWWWLang}/builder/echarts.html?' + parameters);
+        });

@@ -1,0 +1,28 @@
+extends layouts/inner
+
+block inner_content
+
+    #left-chart-nav
+        ul
+
+    #explore-container
+        #toolbar
+            #theme
+                span Theme:
+                a(href="./index.html" title="default" data-theme="default" class="default")
+                    span
+                a(href="./index.html?theme=light" title="light" data-theme="light" class="light")
+                    span
+                a(href="./index.html?theme=dark" title="dark" data-theme="dark" class="dark")
+                    span
+
+        .chart-list-panel
+
+block extra_js
+
+    script(type='text/javascript', src='#{cdnThirdParty.waypoints}')
+    script(type='text/javascript', src='#{cdnThirdParty.jqueryLazyLoad}')
+
+    script(type='text/javascript', src='#{cdnPayRoot}/javascripts/chart-list-data.js?_v_=#{buildVersion}')
+    script(type='text/javascript', src='#{cdnPayRoot}/javascripts/chart-list-data-gl.js?_v_=#{buildVersion}')
+    script(type='text/javascript', src='#{cdnPayRoot}/javascripts/chart-list.js?_v_=#{buildVersion}')

@@ -1,0 +1,116 @@
+extends ../layouts/basic
+
+block variablesLang
+    include ./_variablesLang.jade
+
+block extra_head
+    title Download - Apache ECharts
+
+block content
+
+    style.
+        /*
+        #download-main .d-section-version .circle-wrap {
+            line-height: 120px;
+            font-size: 20px;
+            font-family: Helvetica;
+            color: #214d62;
+            font-weight: normal;
+        }
+        */
+
+    nav(class='navbar navbar-default navbar-fixed-top')
+        include ./nav
+
+    .page-main
+        .page-info
+            h1 Download
+            p Free to choose to download different versions, different topics, the map data you need. You can be customized according to your needs.
+            p.page-info-echarts Apache ECharts<sup>TM</sup>
+        .page-content.container#download-main
+            .d-section-version.d-section
+
+                h3.first Option 1: Install from downloaded source code or binary
+
+                table.table#download-table
+                    tr
+                        th Version
+                        th Release Date
+                        th Download Source from a Mirror
+                        th Dist files on GitHub
+
+                .checksum
+                    p <strong>Note:</strong> when downloading from a mirror please check the <a href="https://www.apache.org/dev/release-signing#sha-checksum">SHA-512</a> and verify the <a href="https://www.apache.org/dev/release-signing#openpgp">OpenPGP</a> compatible signature from the main <a href="https://www.apache.org">Apache site</a>. Links are provided above (next to the release download link). This <a href="https://www.apache.org/dist/incubator/echarts/KEYS">KEYS</a> file contains the public keys used for signing release. It is recommended that (when possible) a <a href="https://www.apache.org/dev/release-signing#web-of-trust">web of trust</a> is used to confirm the identity of these keys.
+
+                    h4 To verify ECharts releases using GPG:
+                    ol
+                        li Download the release apache-echarts-X.Y.Z-incubating-src.zip from a mirror site.
+                        li Download the checksum apache-echarts-X.Y.Z-incubating-src.zip.asc from <a href="https://www.apache.org/dist/incubator/echarts/">Apache</a>.
+                        li Download the <a href="https://www.apache.org/dist/incubator/echarts/KEYS">ECharts KEYS</a> file.
+                        li gpg –import KEYS
+                        li gpg –verify apache-echarts-X.Y.Z-incubating-src.zip.asc
+
+                    h4 To perform a quick check using SHA-512:
+                    ol
+                        li Download the release apache-echarts-X.Y.Z-incubating-src.zip from a mirror site.
+                        li Download the checksum apache-echarts-X.Y.Z-incubating-src.zip.512 from <a href="https://www.apache.org/dist/incubator/echarts/">Apache</a>.
+                        li shasum -a 512 apache-echarts-X.Y.Z-incubating-src.zip
+
+                    h4 License
+                    p Apache ECharts is licensed under <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>.
+
+                h3 Option 2: Install from npm
+                p <code>npm install echarts</code>
+
+                h3 Option 3: Custom Build
+                a.btn.btn-main.btn-thirdary.more-btn(href="builder.html") Customize
+                p Choose the features you want and build the file online.
+
+                h3 After downloading...
+                p
+                    a(href='./tutorial.html') Get Started
+
+        include ./footer
+
+block extra_js
+    script(src="#{getAssetUrl(cdnPayRoot, ecWWWLang + '/js/download.js')}")
+    script(type='text/javascript').
+        document.getElementById('nav-download').className = 'active';
+
+        //- var list = [
+        //-         {
+        //-             label: 'Common',
+        //-             fileName: 'echarts.common.min.js',
+        //-             descHTML0: 'Includes common charts and components.',
+        //-             descHTML1: 'line bar pie scatter legend tooltip toolbox markLine markPoint markArea dataZoom'
+        //-         },
+        //-         {
+        //-             label: 'Simple',
+        //-             fileName: 'echarts.simple.min.js',
+        //-             descHTML0: 'Only includes basic charts.',
+        //-             descHTML1: 'line bar pie'
+        //-         },
+        //-         {
+        //-             label: 'Full',
+        //-             fileName: 'echarts.min.js',
+        //-             descHTML0: 'Includes all charts and components.',
+        //-             descHTML1: ''
+        //-         },
+        //-         {
+        //-             label: 'Source',
+        //-             fileName: 'echarts.js',
+        //-             descHTML0: 'Source code of all charts and components, including warnings and hints for dev.',
+        //-             descHTML1: ''
+        //-         }
+        //-     ];
+
+        //-     function encodeHTML(source) {
+        //-         return source == null
+        //-             ? ''
+        //-             : String(source)
+        //-                 .replace(/&/g, '&amp;')
+        //-                 .replace(/</g, '&lt;')
+        //-                 .replace(/>/g, '&gt;')
+        //-                 .replace(/"/g, '&quot;')
+        //-                 .replace(/'/g, '&#39;');
+        //-     }

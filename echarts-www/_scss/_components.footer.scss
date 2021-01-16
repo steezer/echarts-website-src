@@ -1,0 +1,142 @@
+footer {
+    min-height: 190px;
+    background-color: $clr-primary;
+    color: #808795;
+    font-size: 14px;
+
+    &.inner-footer {
+        background-color: transparent;
+        border-top: 1px solid #eee;
+        margin-top: 40px;
+        color: #aaa;
+        font-size: 12px;
+
+        .container {
+            padding: 0;
+        }
+
+        p {
+            line-height: 20px;
+        }
+
+        .row {
+            margin-top: 20px !important;
+        }
+
+        #footer-icon-panel {
+            text-align: right;
+
+            img {
+                margin-top: 20px;
+                width: 250px;
+            }
+        }
+    }
+
+    .row {
+        margin-top: 50px !important;
+        margin-bottom: 0 !important;
+    }
+
+    .logo {
+        img {
+            display: block;
+            margin-bottom: 20px;
+            width: 109px;
+        }
+    }
+
+    .footer-apache-logo {
+        width: 300px;
+        max-width: 80%;
+        margin: 0 0 10px 0;
+    }
+
+    #echarts-copyright {
+        color: rgba(255, 255, 255, 0.4);
+        margin: 65px 0 20px 0;
+        font-size: 1.2rem;
+    }
+
+    h3 {
+        color: #fff;
+        font-size: 1.5rem;
+        margin: 10px 0;
+    }
+
+    ul {
+        height: 150px;
+
+        dt {
+            width: 50%;
+            float: left;
+            font-weight: 300;
+        }
+
+        li {
+            font-weight: 300;
+        }
+
+        a {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 1.2rem;
+            margin: 5px 0;
+
+            &:hover {
+                color: rgba(255, 255, 255, 0.8);
+            }
+        }
+    }
+
+    .icon-panel {
+        margin-top: 20px;
+    }
+
+        .footer-icon {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border-radius: 50px;
+            margin-right: 10px;
+            padding: 8px 10px;
+            border: 1px solid white;
+            opacity: 0.5;
+            transition: 0.5s;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+}
+
+@media (max-width: 992px) {
+    footer {
+        .footer-apache-logo {
+            transform: scale(0.7);
+        }
+        .icon-panel {
+            margin: 20px 0;
+        }
+
+        #echarts-copyright {
+            margin: 20px 0;
+            text-align: center;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    footer {
+        .logo img {
+            margin: 0 auto;
+        }
+
+        #footer-icon-panel {
+            text-align: center;
+        }
+
+        #echarts-copyright {
+            text-align: center;
+        }
+    }
+}

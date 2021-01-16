@@ -1,0 +1,28 @@
+extends ../layouts/basic
+
+block variablesLang
+    include ./_variablesLang.jade
+
+block extra_head
+    title Dependencies - Apache ECharts
+
+block content
+    nav(class='navbar navbar-default navbar-fixed-top')
+        include ./nav
+
+    .page-main
+        .page-info
+            h1 Dependencies
+            p.page-info-echarts Apache ECharts<sup>TM</sup>
+
+        .page-content
+            .container
+                h2 ZRender
+                p ECharts depends on <a href="https://github.com/ecomfe/zrender">ZRender</a>, a lightweight canvas library which provides 2d draw.
+
+        include ./footer
+
+block extra_js
+
+    script(type='text/javascript').
+        document.getElementById('nav-contribute').className = 'active';
